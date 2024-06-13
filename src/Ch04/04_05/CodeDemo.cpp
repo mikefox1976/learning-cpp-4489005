@@ -5,8 +5,33 @@
 #include <iostream>
 #include <vector>
 #include "records.h"
-
-int main(){
+float ZamienLitereNaOcene(char letter_grade){
+    float result=0.0f;
+    switch (letter_grade)
+    {
+    case 'A':
+        result=4.0f;
+        break;
+    case 'B':
+        result=3.0f;
+        break;
+    case 'C':
+        result=2.0f;
+        break;
+    case 'D':   
+        result=1.0f;
+        break;
+    case 'F':
+        result=0.0f;
+        break;
+    default:
+        result=0.0f;
+        break;
+    }
+    return result;
+}
+int main()
+{
     float GPA = 0.0f;
     int id;
     
@@ -23,15 +48,40 @@ int main(){
 
     std::cout << "Enter a student ID: " << std::flush;
     std::cin >> id;
-
-    // Calculate the GPA for the selected student.
-    // Write your code here
-
+    float total_points=0.0f;
+    int total_credits=0;
     std::string student_str;
-    student_str = students[0].get_name(); // Change this to the selected student's name
+    for(auto s:students)
+    {
+        if(s.get_id()==id)
+        {
+            student_str=s.get_name();
+            for(auto g:grades)
+            {
+                if(g.get_student_id()==id)
+                {
+                    for(auto c:courses)
+                    {
+                        if(c.get_id()==g.get_course_id())
+                        {
+                            float grade_digit=0.0f;
+                            grade_digit=ZamienLitereNaOcene(g.get_grade());
+                            int credit=c.get_credits();
+                            total_points+=grade_digit*credit;
+                            total_credits+=credit;
 
-    std::cout << "The GPA for " << student_str << " is " << GPA << std::endl;
+                        }
+                
+                    }
+                }
+            }
+        }
+
     
+    
+    }
+    GPA=total_points/(float)total_credits;
+    std::cout << "The GPA for " << student_str << " is " << GPA << std::endl;
     std::cout << std::endl << std::endl;
     return (0);
 }
