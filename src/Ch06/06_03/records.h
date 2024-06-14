@@ -59,4 +59,5 @@ public:
     std::string get_course_name(int) const;
     void report_card(int);
     bool initialize_from_files(std::string,std::string,std::string);
+    void report_card_to_file(int sid,std::string);
 };

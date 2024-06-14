@@ -119,6 +119,32 @@ void StudentRecords::report_card(int sid){
     std::cout << "GPA: " << (points / credits) << std::endl;
 }
 
+void StudentRecords::report_card_to_file(int sid,std::string output_file){
+  std::ofstream outFile;
+    float a = 4.333f, b = 5.302f;
+
+    outFile.open(output_file);
+    if (outFile.fail())
+        std::cout << std::endl << "Couldn't open the file!" << std::endl;
+    else
+    {
+        float points = 0.0f, credits = 0.0f;
+        outFile<< "Report Card for " << get_student_name  (sid) << std::endl;
+        for (Grade& grd : grades)
+        if (grd.get_student_id() == sid){
+            outFile << get_course_name(grd.get_course_id()) << ": " << grd.get_grade() << std::endl;
+            unsigned char current_credits = get_course_credits(grd.get_course_id());
+            credits += current_credits;
+            points += get_num_grade(grd.get_grade()) * current_credits;
+        }
+        outFile << "GPA: " << (points / credits) << std::endl;
+        outFile.close();
+        std::cout << "File written successfully!" << std::endl;
+    }
+    
+    
+}
+
 bool StudentRecords::initialize_from_files(std::string students_file,std::string grades_file,std::string courses_file)
 {
     std::ifstream inFile;
@@ -172,7 +198,6 @@ inFile.open(courses_file);
 
 
 
-    return (0);
+    return(true);
 
 }
-

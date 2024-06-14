@@ -6,7 +6,6 @@
 #include <vector>
 #include "records.h"
 
-void initialize(StudentRecords&);
 
 int main(){
     int id;
@@ -17,7 +16,7 @@ int main(){
     std::cout << "Enter a student ID: " << std::flush;
     std::cin >> id;
 
-    SR.report_card(id);
+    SR.report_card_to_file(id,"report.txt");
     
     std::cout << std::endl << std::endl;
     return (0);
