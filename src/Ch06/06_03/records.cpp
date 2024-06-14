@@ -119,7 +119,7 @@ void StudentRecords::report_card(int sid){
     std::cout << "GPA: " << (points / credits) << std::endl;
 }
 
-void StudentRecords::report_card_to_file(int sid,std::string output_file){
+void StudentRecords::write_report_card_to_file(int sid,std::string output_file){
   std::ofstream outFile;
     float a = 4.333f, b = 5.302f;
 
